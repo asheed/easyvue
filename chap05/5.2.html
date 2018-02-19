@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>5.2 이벤트 한정자(계산기앱)</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/my.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+           <h1>2개의 숫자를 입력하고, 연산자를 선택하세요!</h1>
+           <form class="form-inline">
+               <!-- 입력을 숫자로 파싱하기 위해 'number'를 사용합니다. -->
+               <input v-model.number="a" class="form-control">
+               <select v-model="operator" class="form-control">
+                   <option>+</option>
+                   <option>-</option>
+                   <option>*</option>
+                   <option>/</option>
+               </select>
+               <input v-model.number="b" class="form-control">
+               <button type="submit" @click.prevent="calculate" class="btn btn-primary">계산!</button>
+           </form>
+           <h2>계산 결과: {{a}} {{operator}} {{b}} = {{c}}</h2>
+           <pre>
+               {{ $data }}
+           </pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '.container',
+            data: {
+                a: 1,
+                b: 2,
+                c: null,
+                operator: "+",
+            },
+            // 메소드 객체 입니다.
+            methods: {
+                // 계산 버튼 클릭 시, 백그라운드에서 폼을 제출하고 페이지가 다시 로드되어 결과값이 사라집니다.
+                // 이를 해결하기 위해서 onsubmit 이벤트의 기본 동작을 취소합니다.
+                calculate: function(event) {
+                    //event.preventDefault();
+                    switch (this.operator) {
+                        case "+":
+                            this.c = this.a + this.b;
+                            break;
+                        case "-":
+                            this.c = this.a - this.b;
+                            break;
+                        case "*":
+                            this.c = this.a * this.b;
+                            break;
+                        case "/":
+                            this.c = this.a / this.b;
+                            break;
+                    }
+                }
+            },
+        });
+    </script>
+</html>

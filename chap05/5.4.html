@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>5.4 계산된 프로퍼티(계산기앱)</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/my.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+           a={{a}}, b={{b}}
+           <input v-model.number="a">
+           <pre>
+               {{ $data }}
+           </pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '.container',
+            data: {
+                a: 1,
+            },
+            computed: {
+                // 계산된 프로퍼티
+                b: function() {
+                    // this는 Vue 인스턴스를 가리킵니다.
+                    return this.a + 1;
+                }
+            }
+        });
+    </script>
+</html>

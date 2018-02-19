@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>5.5 연습문제</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/my.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <h1>시장 투표 현황</h1>
+            <ul class="list-group">
+                <li v-for="candidate in candidates" class="list-group-item">
+                    {{ index }} {{ candidate.name }} {{ candidate.votes }} 
+                    <button class="btn btn-default" @click="candidate.votes++">Vote</button>
+                </li>
+            </ul>
+            <input @keyup.delete="clear" class="form-control" placeholder="press 'delete' key to reset">
+            <br>
+            <h2>현재 시장은 {{mayor.name}} 입니다.</h2>
+            <pre>{{ $data }}</pre>
+            <pre>{{ mayor }}</pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '.container',
+            data: {
+                candidates: [
+                    {
+                        name: "Mr. Black",
+                        votes: 140
+                    },
+                    {
+                        name: "Mr. Pink",
+                        votes: 135
+                    },
+                    {
+                        name: "Mr. White",
+                        votes: 145
+                    },
+                    {
+                        name: "Mr. Brown",
+                        votes: 130
+                    },
+                ]
+            }
+            ,
+            computed: {
+                // 계산된 프로퍼티
+                mayor: function() {
+                    // this는 Vue 인스턴스를 가리킵니다.
+                    var candidatesSorted = this.candidates.sort(function (a,b) {
+                        return b.votes - a.votes;
+                    });
+                    return candidatesSorted[0];
+                }
+            },
+            methods: {
+                clear: function() {
+                    this.candidates = this.candidates.map(function (candidate) {
+                        candidate.votes = 0;
+                        return candidate;
+                    });
+                }
+            }
+        });
+    </script>
+</html>

@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>5.1.1 인라인 이벤트 핸들링</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/my.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+           <br>
+           <button v-on:click="upvotes++" type="button" class="btn btn-primary">
+               추천! {{upvotes}}
+           </button>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '.container',
+            data: {
+                upvotes: 0
+            }
+        });
+    </script>
+</html>
