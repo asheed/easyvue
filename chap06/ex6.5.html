@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/my.css" rel="stylesheet">
+        <title>ex 6.5 연습문제</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>주민 명부</h1>
+            <div>
+                <h1>아이원 아파트 주거 명부</h1>
+                <ul class="list-group">
+                    <li v-for="person in orderedPeople()" class="list-group-item">
+                        {{ person.name }} {{ person.age }}
+                    </li>
+                </ul>
+                
+                <h1>고령자 목록(65세 이상)</h1>
+                <ul class="list-group">
+                    <li v-for="person in olderlist" class="list-group-item">
+                        {{ person.name }} {{ person.age }}
+                    </li>
+                </ul>
+            </div>
+            <pre>
+                    {{ $data }}
+            </pre>            
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.min.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '.container',
+            data: {
+                people: [
+                  { name: "Obelix", age: 31 },
+                  { name: "Asterix", age: 32 },
+                  { name: "Julius Caesar", age: 65 },
+                  { name: "Methusalix", age: 103 },
+                  { name: "Majestix", age: 72 }  
+                ],
+                //order: 'desc'
+            },
+            computed: {
+              olderlist: function() {
+                  return this.people.filter(function(person){
+                      return person.age >= 65;
+                  });
+              },
+            },
+            methods: {
+                orderedPeople: function() {
+                    return _.orderBy(this.people, 'age')
+                },
+            }
+        });
+    </script>
+</html>

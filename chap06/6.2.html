@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/my.css" rel="stylesheet">
+        <title>6.2 User Stories (정렬)</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Let's hear some stories</h1>
+            <div>
+                <h3>Alex's stories</h3>
+                <ul class="list-group">
+                    <li v-for="story in storiesBy('Alex')" class="list-group-item">
+                        {{ story.writer }} said "{{ story.plot }}"
+                    </li>
+                </ul>
+                <h3>John's stories</h3>
+                <ul class="list-group">
+                    <li v-for="story in storiesBy('John')" class="list-group-item">
+                        {{ story.writer }} said "{{ story.plot }}"
+                    </li>
+                </ul>
+                <h3>Famous Stories! ({{famous.length}})</h3>
+                <ul class="list-group">
+                    <li v-for="story in famous" class="list-group-item">
+                        {{ story.writer }} said "{{ story.plot }}" and upvoted {{ story.upvotes }} times.
+                    </li>
+                </ul>
+                <h3>인기있는 이야기들</h3>
+                <ul class="list-group">
+                    <li v-for="story in orderedStories" class="list-group-item">
+                        {{ story.writer }} said "{{ story.plot }}" and upvoted {{ story.upvotes }} times.
+                    </li>
+                </ul>
+                <button @click="order = order * -1" class="btn btn-primary">정렬 순서 바꾸기</button>
+            </div>
+            <pre>
+                    {{ $data }}
+            </pre>
+            <div class="form-group">
+                <label for="query">
+                    무엇을 찾고 계신가요?
+                </label>
+                <input v-model="query" class="form-control">
+            </div>
+            <h3>검색결과:</h3>
+            <ul class="list-group">
+                <li v-for="story in search" class="list-group-item">
+                    {{ story.writer }} said "{{ story.plot }}"
+                </li>
+            </ul>
+            
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '.container',
+            data: {
+                stories: [
+                    {
+                        plot: "I crashed my car today!",
+                        writer: "Alex",
+                        upvotes: 28
+                    },
+                    {
+                        plot: "Yesterday, someone stole my bag!",
+                        writer: "John",
+                        upvotes: 8
+                    },
+                    {
+                        plot: "Someone ate my chocolate...",
+                        writer: "John",
+                        upvotes: 51
+                    },
+                    {
+                        plot: "I ate someone's chocolate!",
+                        writer: "Alex",
+                        upvotes: 74
+                    },
+                ],
+                query: '',
+                order: -1
+            },
+            computed: {
+              famous: function() {
+                  return this.stories.filter(function(item){
+                      return item.upvotes > 25;
+                  });
+              },
+              orderedStories: function() {
+                  var order = this.order;
+                  return this.stories.sort(function(a,b) {
+                      return (a.upvotes - b.upvotes) * order;
+                  });
+              },
+              search: function(writer) {
+                  var query = this.query;
+                  return this.stories.filter(function (story) {
+                      return story.plot.includes(query);
+                  });
+              },
+            },
+            methods: {
+                // 작가에 따라 이야기를 필터링 하는 메소드
+                storiesBy: function(writer) {
+                    return this.stories.filter(function (story) {
+                        return story.writer == writer;
+                    })
+                },
+            }
+        });
+    </script>
+</html>
