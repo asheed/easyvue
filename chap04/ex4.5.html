@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>연습문제 4.5</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/my.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+           <h1>내 정보입니다!!!</h1>
+           <div>
+               <ul class="list-group">
+                   <li v-for="(value, key, index) in myinfo" class="list-group-item">
+                       {{ index }}: {{ key }} = {{ value }}
+                   </li>
+               </ul>
+           </div>
+           <br>
+           <pre>
+               {{ $data }}
+           </pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '.container',
+            data: {
+                myinfo: {
+                    name: "안우진",
+                    height: "177cm",
+                    weight: "93kg",
+                    eyeColor: "black",
+                    favoriteFood: "meat"
+                }
+            }
+        });
+    </script>
+</html>
