@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>연습문제 3.5</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <!-- the || is the logical operator OR -->
+            <div v-if="gender == 'male' || gender == 'female'">
+                <h1>Hello,
+                    <!-- gender가 male 일때 span 태그를 렌더링 -->
+                    <span v-show="gender == 'male'">Mr. {{name}}</span>
+                    <!-- gender가 female 일때 span 태그를 렌더링 -->
+                    <span v-show="gender == 'female'">Miss {{name}}</span>
+                </h1>
+            </div>
+            <h1 v-else>So you can't decide yet. Fine!!!</h1>
+
+            <!-- 입력 부분 -->
+            <label for="gender">Enter your gender:</label>
+            <input v-model="gender" class="form-control" id="gender"></input>
+            <label for="name">Enter your name:</label>
+            <input v-model="name" class="form-control" id="name">
+            <pre>{{ $data }}</pre>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.js"></script>
+    <script>
+        new Vue({
+            el: '.container',
+            data:
+            {
+                gender: 'Unknown',
+                name: 'Unknown'
+            },
+        })
+    </script>
+</html>
