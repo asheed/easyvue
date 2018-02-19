@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hello Vue</title>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#message').on('keydown', function() {
+                    var message = $('#message').val();
+                    //alert(message);
+                    $('h1').text(message);
+                    //alert( "Handler for .keydown() called." );
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>이건 jquery 버전</h1>
+            <input id="message"">
+        </div>
+    </body>
+</html>
